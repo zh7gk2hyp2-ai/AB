@@ -1,7 +1,7 @@
 /* ═══ AB EVENTS — shared page behaviour ═══ */
 const CONFIG = {
-  whatsapp: "9665XXXXXXXX",   // رقم واتساب بصيغة دولية بدون +
-  phone:    "+9665XXXXXXXX",  // رقم الاتصال
+  whatsapp: "966507762024",   // رقم واتساب بصيغة دولية بدون +
+  phone:    "+966507762024",  // رقم الاتصال
 };
 
 /* nav scroll + back-to-top */
