@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#0B0B0D"/>
+<title>الوظائف — AB Events | الطائف</title>
+<meta name="description" content="انضم إلى فريق AB Events في الطائف — فرص عمل في تنسيق الفعاليات، التصميم، والإنتاج الفني."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230B0B0D'/><text x='50' y='68' text-anchor='middle' font-size='44' fill='%23C9A24B' font-family='Georgia,serif' font-weight='700'>AB</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="loader"><div class="loader-mark">AB</div><div class="loader-bar"><i></i></div><div class="loader-sub">AB Events · الطائف</div></div>
+<div class="cursor-ring" id="cRing"></div><div class="cursor-dot" id="cDot"></div>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+  <a href="index.html" class="brand"><div class="brand-mark">AB</div><div class="brand-txt"><b>AB EVENTS</b><span>Event Atelier · Taif</span></div></a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن</a>
+    <a href="services.html">الخدمات</a>
+    <a href="index.html#work">المشاريع</a>
+    <a href="blog.html">المدونة</a>
+    <a href="careers.html" class="active">الوظائف</a>
+    <a href="index.html#contact" class="btn btn-gold nav-cta">احجز الآن</a>
+  </div>
+  <button class="burger" id="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+</div></nav>
+
+<header class="page-hero">
+  <div class="stage"></div><div class="grain"></div>
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">الرئيسية</a><span>/</span>الوظائف</div>
+    <h1>انضم إلى <span class="serif" style="font-style:italic;color:var(--champagne)">فريقنا</span></h1>
+    <p>نبحث دائماً عن مواهب شغوفة بالتفاصيل تشاركنا صناعة تجارب استثنائية.</p>
+  </div>
+</header>
+
+<section class="section dark">
+  <div class="wrap">
+    <div style="margin-bottom:40px"><span class="eyebrow">الفرص المتاحة</span><h2 class="title reveal">وظائف مفتوحة</h2></div>
+    <div class="grid-2">
+      <div class="card reveal"><span class="chip">دوام كامل · الطائف</span><h3 style="margin-top:14px">منسّق فعاليات</h3><p>تنسيق وتنفيذ المناسبات ميدانياً وإدارة المورّدين يوم الفعالية.</p><a href="#apply" class="btn btn-outline" data-cursor style="margin-top:16px">قدّم الآن</a></div>
+      <div class="card reveal"><span class="chip">دوام كامل · الطائف</span><h3 style="margin-top:14px">مصمم جرافيك / ثيمات</h3><p>تصميم الهويات البصرية وثيمات الفعاليات والمطبوعات.</p><a href="#apply" class="btn btn-outline" data-cursor style="margin-top:16px">قدّم الآن</a></div>
+      <div class="card reveal"><span class="chip">جزئي / مشاريع</span><h3 style="margin-top:14px">مصوّر / صانع محتوى</h3><p>توثيق الفعاليات وإنتاج محتوى للسوشال ميديا (تيك توك/انستغرام).</p><a href="#apply" class="btn btn-outline" data-cursor style="margin-top:16px">قدّم الآن</a></div>
+      <div class="card reveal"><span class="chip">حسب الطلب</span><h3 style="margin-top:14px">فنّي إنتاج (صوت/إضاءة)</h3><p>تشغيل أنظمة الصوت والإضاءة والشاشات في الفعاليات.</p><a href="#apply" class="btn btn-outline" data-cursor style="margin-top:16px">قدّم الآن</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section light" id="apply">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <span class="eyebrow" style="justify-content:center">التقديم</span>
+    <h2 class="title reveal">أرسل سيرتك الذاتية</h2>
+    <p class="muted reveal" style="max-width:560px;margin-top:14px">عبّئ النموذج وسنرسل بياناتك عبر واتساب لفريق التوظيف، أو راسلنا مباشرة.</p>
+    <form class="form-card reveal" id="jobForm" style="margin-top:34px;text-align:right;width:100%">
+      <div class="field"><label for="jn">الاسم الكامل</label><input id="jn" required placeholder="اسمك"></div>
+      <div class="field"><label for="jp">الجوال</label><input id="jp" type="tel" required placeholder="05xxxxxxxx"></div>
+      <div class="field"><label for="jr">الوظيفة</label>
+        <select id="jr" required><option value="" disabled selected>اختر الوظيفة</option><option>منسّق فعاليات</option><option>مصمم جرافيك</option><option>مصوّر / صانع محتوى</option><option>فنّي إنتاج</option><option>أخرى</option></select></div>
+      <div class="field"><label for="jm">نبذة عنك وخبراتك</label><textarea id="jm" placeholder="اكتب باختصار عن خبراتك ورابط أعمالك إن وُجد"></textarea></div>
+      <button type="submit" class="btn btn-gold" data-cursor style="width:100%">إرسال عبر واتساب 💬</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><div class="brand-mark">AB</div><div class="brand-txt"><b>AB EVENTS</b><span>Event Atelier · Taif</span></div></a>
+        <p>وكالة متخصّصة في تصميم وإنتاج الفعاليات الفاخرة — نحوّل تفاصيلك إلى قصة تُروى.</p>
+        <div class="socials"><a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener">🎵</a><a href="#" data-wa>💬</a><a href="mailto:hello@abevents.sa">✉️</a></div>
+      </div>
+      <div class="footer-col"><h4>الشركة</h4><a href="about.html">من نحن</a><a href="index.html#work">أعمالنا</a><a href="services.html">خدماتنا</a><a href="partners.html">شركاؤنا</a></div>
+      <div class="footer-col"><h4>روابط</h4><a href="blog.html">المدونة</a><a href="careers.html">الوظائف</a><a href="index.html#faq">الأسئلة</a><a href="index.html#contact">تواصل</a></div>
+      <div class="footer-col"><h4>تواصل</h4><a href="index.html#contact">الطائف، السعودية</a><a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener">@abevents02</a><a href="mailto:hello@abevents.sa">hello@abevents.sa</a></div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> AB Events — جميع الحقوق محفوظة.</span><span>تصميم وتنفيذ الفعاليات · الطائف</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="للأعلى">↑</button>
+<a class="wa-float" data-wa href="#" aria-label="واتساب">💬</a>
+<script src="assets/app.js"></script>
+<script>
+document.getElementById('jobForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const msg=`✦ طلب توظيف — AB Events\n\nالاسم: ${jn.value}\nالجوال: ${jp.value}\nالوظيفة: ${jr.value}\n`+(jm.value?`نبذة: ${jm.value}\n`:'');
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
+});
+</script>
+</body>
+</html>
