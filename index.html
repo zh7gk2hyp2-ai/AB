@@ -285,6 +285,24 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 .tiktok-embed{margin:0 auto !important;}
 .tt-note{text-align:center;color:var(--txt-dark-soft);font-size:.86rem;margin-top:22px;}
 .tt-note a{color:var(--champagne);font-weight:700;text-decoration:underline;}
+/* real tiktok video grid */
+.vid-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.vidcard{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:9/16;border:1px solid var(--ld);
+  cursor:pointer;transition:.4s var(--ease);background:#15151b;display:block;}
+.vidcard:hover{transform:translateY(-6px);border-color:rgba(201,162,75,.5);box-shadow:0 24px 50px rgba(0,0,0,.5);}
+.vidcard img{width:100%;height:100%;object-fit:cover;transition:.5s var(--ease);}
+.vidcard:hover img{transform:scale(1.06);}
+.vidcard::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72));}
+.vidcard .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:54px;height:54px;
+  border-radius:50%;background:rgba(11,11,13,.55);backdrop-filter:blur(4px);border:1px solid rgba(201,162,75,.6);
+  display:grid;place-items:center;color:#fff;font-size:1.1rem;transition:.3s;}
+.vidcard:hover .play{background:var(--gold);color:#0B0B0D;transform:translate(-50%,-50%) scale(1.12);}
+.vidcard .cap{position:absolute;bottom:0;right:0;left:0;z-index:2;padding:14px;color:#fff;font-size:.8rem;
+  font-weight:500;line-height:1.5;}
+.vidcard .tt-badge{position:absolute;top:10px;right:10px;z-index:2;background:rgba(11,11,13,.6);backdrop-filter:blur(4px);
+  border:1px solid rgba(201,162,75,.4);color:var(--champagne);font-size:.64rem;padding:4px 9px;border-radius:100px;letter-spacing:.5px;}
+@media(max-width:900px){.vid-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:620px){.vid-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
 
 /* ════════ GALLERY ════════ */
 .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px;}
@@ -555,14 +573,9 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
   <div class="wrap" style="text-align:center">
     <span class="eyebrow" style="justify-content:center">من كواليسنا</span>
     <h2 class="title reveal">شاهد إبداعاتنا على <span class="thin">تيك توك</span></h2>
-    <p class="subtitle muted reveal" style="margin:18px auto 0">أحدث مناسباتنا وتنسيقاتنا مباشرةً من حسابنا الرسمي @abevents02.</p>
-    <div class="tt-wrap reveal">
-      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@abevents02"
-        data-unique-id="abevents02" data-embed-type="creator" style="max-width:780px;min-width:288px;">
-        <section><a target="_blank" href="https://www.tiktok.com/@abevents02?refer=creator_embed">@abevents02</a></section>
-      </blockquote>
-    </div>
-    <p class="tt-note">لم تظهر المقاطع؟ تابعنا على <a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener">@abevents02</a></p>
+    <p class="subtitle muted reveal" style="margin:18px auto 40px">مقاطع حقيقية من مناسباتنا وتنسيقاتنا — اضغط أي مقطع لمشاهدته على تيك توك.</p>
+    <div class="vid-grid reveal" id="vidGrid"><!-- filled by JS --></div>
+    <p class="tt-note" style="margin-top:30px">تابع كل جديد على <a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener">@abevents02</a></p>
   </div>
 </section>
 
@@ -574,7 +587,7 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
       <p class="muted" style="max-width:340px">اضغط أي صورة لعرضها بالحجم الكامل.</p>
     </div>
     <div class="gal-grid reveal" id="galGrid"><!-- filled by JS --></div>
-    <p class="muted" style="text-align:center;font-size:.8rem;margin-top:20px">* أغلفة توضيحية — تُستبدل بصور فعاليات AB Events الحقيقية.</p>
+    <p class="muted" style="text-align:center;font-size:.8rem;margin-top:20px">لقطات من فعالياتنا الحقيقية · تابعنا على <a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener" style="color:var(--gold-dark);font-weight:700">@abevents02</a></p>
   </div>
 </section>
 
@@ -702,7 +715,6 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 <button class="totop" id="totop" aria-label="للأعلى">↑</button>
 <a class="wa-float" id="waFloat" href="#" aria-label="واتساب">💬</a>
 
-<script async src="https://www.tiktok.com/embed.js"></script>
 <script>
 /* ═════ CONFIG — عدّل هذه القيم ببيانات AB Events الفعلية ═════ */
 const CONFIG = {
@@ -783,21 +795,46 @@ const lt=document.getElementById('logoTrack');
   lt.appendChild(d);
 });
 
-/* ═════ GALLERY ═════ */
+/* ═════ TIKTOK VIDEOS (real content) ═════ */
+const VIDEOS=[
+  {id:'7663459981957582100',cap:'مشاركة عائلة النفيعي'},
+  {id:'7658835023608532245',cap:'رأي وتصوير عميلتنا مشاعل'},
+  {id:'7658568594308992277',cap:'روضة دار البراعم'},
+  {id:'7657279951330299157',cap:'حفلات الطائف'},
+  {id:'7657112781673499924',cap:'التفاصيل الدقيقة تصنع التميّز'},
+  {id:'7656230504236092693',cap:'أفراح وحفلات الطائف'},
+  {id:'7655302126666517780',cap:'شاليهات الطائف'},
+  {id:'7655079396830825748',cap:'تنسيق حفلات'},
+  {id:'7654861359552711956',cap:'تنسيق شاليهات الطائف'},
+];
+const vidGrid=document.getElementById('vidGrid');
+if(vidGrid){
+  vidGrid.innerHTML=VIDEOS.map(v=>`
+    <a class="vidcard" href="https://www.tiktok.com/@abevents02/video/${v.id}" target="_blank" rel="noopener" data-cursor>
+      <img src="assets/media/${v.id}.jpg" alt="${v.cap} — AB Events" loading="lazy">
+      <span class="tt-badge">▶ TikTok</span>
+      <span class="play">▶</span>
+      <span class="cap">${v.cap}</span>
+    </a>`).join('');
+}
+
+/* ═════ GALLERY (real images) ═════ */
 const GAL=[
-  {i:'💐',c:'big'},{i:'🕯️',c:''},{i:'🎊',c:''},{i:'✨',c:'wide'},
-  {i:'🥂',c:''},{i:'🌹',c:''},{i:'🎈',c:'wide'},{i:'💫',c:''},{i:'🎀',c:''}
+  {id:'7654861359552711956',c:'big'},{id:'7658835023608532245',c:''},{id:'7657112781673499924',c:''},
+  {id:'7663459981957582100',c:'wide'},{id:'7655079396830825748',c:''},{id:'7656230504236092693',c:''},
+  {id:'7658568594308992277',c:'wide'},{id:'7657279951330299157',c:''},{id:'7655302126666517780',c:''}
 ];
 const galGrid=document.getElementById('galGrid');
-GAL.forEach((g,i)=>{
+GAL.forEach(g=>{
   const d=document.createElement('div');
   d.className='gal '+g.c;
-  d.style.background=GRADS[i%GRADS.length];
-  d.textContent=g.i;
+  d.style.backgroundImage=`url(assets/media/${g.id}.jpg)`;
+  d.style.backgroundSize='cover';d.style.backgroundPosition='center';
   d.addEventListener('click',()=>{
     const lb=document.getElementById('lightbox');
     const inner=document.getElementById('lbInner');
-    inner.style.background=GRADS[i%GRADS.length];inner.textContent=g.i;
+    inner.style.aspectRatio='auto';inner.style.background='none';inner.style.width='auto';inner.style.height='auto';
+    inner.innerHTML=`<img src="assets/media/${g.id}.jpg" alt="لقطة من فعاليات AB Events" style="max-width:min(560px,92vw);max-height:86vh;border-radius:18px;display:block">`;
     lb.classList.add('open');document.body.style.overflow='hidden';
   });
   galGrid.appendChild(d);
