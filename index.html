@@ -9,7 +9,6 @@
 <meta name="keywords" content="AB Events, تنسيق حفلات, تنظيم فعاليات, الطائف, فعاليات الشركات, مؤتمرات, معارض, تصميم أجنحة, تفعيل علامة تجارية, حفلات VIP, event management"/>
 <meta name="author" content="AB Events"/>
 <meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://abevents.example/"/>
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="AB Events — تصميم وتنفيذ الفعاليات الفاخرة | الطائف"/>
@@ -723,9 +722,10 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 
 <script>
 /* ═════ CONFIG — عدّل هذه القيم ببيانات AB Events الفعلية ═════ */
-const CONFIG = {
+let CONFIG = {
   whatsapp: "966507762024",   // رقم واتساب بصيغة دولية بدون +
   phone:    "+966507762024",  // رقم الاتصال
+  email:    "hello@abevents.sa",
 };
 
 /* ═════ palette helper for placeholder covers ═════ */
@@ -736,7 +736,7 @@ const GRADS=[
   'linear-gradient(150deg,#1c1c22,#2e2a1c)','linear-gradient(150deg,#0f1620,#1d2b3a)'];
 
 /* ═════ PROJECTS ═════ */
-const PROJECTS=[
+let PROJECTS=[
   {cat:'private',catAr:'مناسبات خاصة',ico:'🌿',img:'assets/media/event-5.jpg',title:'مجلس ضيافة بثيم نجدي',client:'مناسبة خاصة',loc:'الطائف',date:'2026',dur:'مساء واحد',desc:'تنسيق مجلس ضيافة فاخر بثيم تراثي نجدي — جلسات أنيقة، تنسيقات ورد برتقالي، وشموع تمنح المكان دفئاً استثنائياً.',svc:['تنسيق','ديكور تراثي','تنسيق زهور','تصوير']},
   {cat:'private',catAr:'مناسبات خاصة',ico:'🍽️',img:'assets/media/event-1.jpg',title:'تنسيق طاولة نجدية',client:'مناسبة خاصة',loc:'الطائف',date:'2026',dur:'مساء واحد',desc:'طاولة ضيافة بلمسات نجدية أصيلة — تفاصيل مدروسة تمزج الموروث بالأناقة المعاصرة.',svc:['تنسيق طاولة','ديكور','ورد','تصوير']},
   {cat:'private',catAr:'مناسبات خاصة',ico:'🌹',img:'assets/media/event-2.jpg',title:'ركن استقبال بالورد',client:'مناسبة خاصة',loc:'الطائف',date:'2026',dur:'مساء واحد',desc:'ركن استقبال راقٍ بتنسيقات ورد طبيعي وبطاقات مخصّصة تُرحّب بالضيوف بأناقة.',svc:['ركن استقبال','تنسيق ورد','بطاقات مخصّصة','ضيافة']},
@@ -752,7 +752,9 @@ const PROJECTS=[
 ];
 
 const masonry=document.getElementById('masonry');
+let currentFilter='all';
 function renderProjects(f='all'){
+  currentFilter=f;
   masonry.innerHTML='';
   PROJECTS.filter(p=>f==='all'||p.cat===f).forEach((p,i)=>{
     const el=document.createElement('div');
@@ -905,15 +907,59 @@ bindCursor();
 
 /* ═════ WHATSAPP / CONTACT wiring ═════ */
 const waLink=(msg)=>`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-document.getElementById('mWa').href=waLink('مرحباً AB Events ✦ أرغب في الاستفسار عن تنظيم فعالية.');
-document.getElementById('waFloat').href=waLink('مرحباً AB Events ✦ أرغب في الاستفسار عن تنظيم فعالية.');
-document.getElementById('mWa').target='_blank';document.getElementById('waFloat').target='_blank';
-document.getElementById('mCall').href='tel:'+CONFIG.phone;
+function wireContact(){
+  const m='مرحباً AB Events ✦ أرغب في الاستفسار عن تنظيم فعالية.';
+  const mWa=document.getElementById('mWa'),wf=document.getElementById('waFloat'),mc=document.getElementById('mCall');
+  if(mWa){mWa.href=waLink(m);mWa.target='_blank';}
+  if(wf){wf.href=waLink(m);wf.target='_blank';}
+  if(mc)mc.href='tel:'+CONFIG.phone;
+}
+wireContact();
 document.getElementById('bookForm').addEventListener('submit',e=>{
   e.preventDefault();const f=e.target;
   const msg=`✦ طلب حجز جديد — AB Events\n\nالاسم: ${f.name.value}\nالجوال: ${f.phone.value}\nنوع الفعالية: ${f.type.value}\n`+
     (f.date.value?`التاريخ: ${f.date.value}\n`:'')+(f.details.value?`التفاصيل: ${f.details.value}\n`:'');
   window.open(waLink(msg),'_blank');
+});
+
+/* ═════ CMS: apply content.json (progressive enhancement — site works without it) ═════ */
+function renderStats(a){
+  const g=document.querySelector('.stats-grid'); if(!g||!a) return;
+  g.innerHTML=a.map(s=>`<div class="stat"><div class="num" data-count="${s.num}" data-suffix="${s.suffix||''}">0</div><div class="lbl">${s.label||''}</div></div>`).join('');
+  g.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+}
+function renderServices(a){
+  const g=document.querySelector('.svc-grid'); if(!g||!a) return;
+  g.innerHTML=a.map((s,i)=>`<div class="svc"><div class="svc-idx">${String(i+1).padStart(2,'0')}</div><div class="svc-ico">${s.ico||'✦'}</div><h3>${s.title||''}</h3><p>${s.desc||''}</p><div class="svc-arrow">تعرّف أكثر ←</div></div>`).join('');
+  bindCursor();
+}
+function renderTestimonials(a){
+  const g=document.querySelector('.tst-grid'); if(!g||!a) return;
+  const st=n=>'★★★★★'.slice(0,Math.max(1,Math.min(5,n||5)));
+  g.innerHTML=a.map(t=>`<div class="tst"><div class="stars">${st(t.stars)}</div><p>"${t.quote||''}"</p><div class="tst-by"><div class="tst-av">${t.av||((t.name||'★')[0])}</div><div><b>${t.name||''}</b><small>${t.role||''}</small></div></div></div>`).join('');
+}
+function renderFaq(a){
+  const g=document.querySelector('.faq'); if(!g||!a) return;
+  g.innerHTML=a.map(f=>`<div class="qa"><button class="qa-q">${f.q||''} <span class="plus">+</span></button><div class="qa-a"><p>${f.a||''}</p></div></div>`).join('');
+  g.querySelectorAll('.qa-q').forEach(q=>q.addEventListener('click',()=>{
+    const qa=q.parentElement,ans=qa.querySelector('.qa-a'),open=qa.classList.contains('open');
+    g.querySelectorAll('.qa').forEach(x=>{x.classList.remove('open');x.querySelector('.qa-a').style.maxHeight=null;});
+    if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+  }));
+  bindCursor();
+}
+function applyData(d){
+  if(!d) return;
+  if(d.config){CONFIG=Object.assign({},CONFIG,d.config);wireContact();
+    if(d.config.email)document.querySelectorAll('a[href^="mailto:"]').forEach(a=>a.href='mailto:'+d.config.email);}
+  if(Array.isArray(d.stats)&&d.stats.length) renderStats(d.stats);
+  if(Array.isArray(d.services)&&d.services.length) renderServices(d.services);
+  if(Array.isArray(d.projects)&&d.projects.length){PROJECTS=d.projects;renderProjects(currentFilter);}
+  if(Array.isArray(d.testimonials)&&d.testimonials.length) renderTestimonials(d.testimonials);
+  if(Array.isArray(d.faq)&&d.faq.length) renderFaq(d.faq);
+}
+fetch('content.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(applyData).catch(()=>{}).finally(()=>{
+  try{const ls=localStorage.getItem('ab_content_v1'); if(ls) applyData(JSON.parse(ls));}catch(e){}
 });
 
 /* ═════ LOADER ═════ */
