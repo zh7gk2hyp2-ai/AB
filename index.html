@@ -127,7 +127,9 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 .brand{display:flex;align-items:center;gap:12px;}
 .brand-mark{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
   background:linear-gradient(135deg,#1a1a20,#0b0b0d);box-shadow:inset 0 0 0 1px rgba(201,162,75,.45);
-  font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.4rem;color:var(--champagne);letter-spacing:1px;}
+  font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.4rem;color:var(--champagne);letter-spacing:1px;overflow:hidden;}
+.brand-mark img{width:66%;height:66%;object-fit:contain;display:block;}
+.loader-logo{width:170px;max-width:62vw;height:auto;display:block;}
 .brand-txt b{display:block;font-size:1.05rem;line-height:1.1;letter-spacing:1px;}
 .brand-txt span{font-size:.62rem;color:var(--champagne);letter-spacing:2.5px;text-transform:uppercase;}
 .nav-links{display:flex;align-items:center;gap:32px;}
@@ -440,7 +442,7 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 
 <!-- ═══ LOADER ═══ -->
 <div id="loader">
-  <div class="loader-mark">AB</div>
+  <div class="loader-mark"><img src="assets/logo-light.svg" alt="AB Events" class="loader-logo"></div>
   <div class="loader-bar"><i></i></div>
   <div class="loader-sub">AB Events · الطائف</div>
 </div>
@@ -453,8 +455,8 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#home" class="brand" data-cursor>
-      <div class="brand-mark">AB</div>
-      <div class="brand-txt"><b>AB EVENTS</b><span>Event Atelier · Taif</span></div>
+      <div class="brand-mark"><img src="assets/monogram.svg" alt="AB Events"></div>
+      <div class="brand-txt"><b>AB EVENTS</b><span>The Art of Luxury Events</span></div>
     </a>
     <div class="nav-links" id="navLinks">
       <a href="about.html">من نحن</a>
@@ -671,7 +673,7 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#home" class="brand"><div class="brand-mark">AB</div><div class="brand-txt"><b>AB EVENTS</b><span>Event Atelier · Taif</span></div></a>
+        <a href="#home" class="brand"><div class="brand-mark"><img src="assets/monogram.svg" alt="AB Events"></div><div class="brand-txt"><b>AB EVENTS</b><span>The Art of Luxury Events</span></div></a>
         <p>وكالة متخصّصة في تصميم وإنتاج الفعاليات الفاخرة — نحوّل تفاصيلك إلى قصة تُروى.</p>
         <div class="socials">
           <a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener" aria-label="تيك توك">🎵</a>

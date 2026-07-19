@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 200" role="img" aria-label="AB — The Art of Luxury Events">
+  <g fill="currentColor" font-family="'Cormorant Garamond','Times New Roman',serif">
+    <text x="150" y="140" text-anchor="middle" font-size="150" font-weight="600" letter-spacing="2">A</text>
+    <rect x="219.2" y="34" width="2.4" height="116" opacity="0.85"/>
+    <text x="292" y="140" text-anchor="middle" font-size="150" font-weight="600" letter-spacing="2">B</text>
+    <text x="220" y="170" text-anchor="middle" font-size="19.5" font-weight="500" letter-spacing="7" font-family="'Manrope','Alexandria',sans-serif">THE ART OF LUXURY EVENTS</text>
+  </g>
+</svg>
