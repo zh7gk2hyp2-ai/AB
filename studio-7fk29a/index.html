@@ -99,6 +99,8 @@ h2.title .it{font-style:italic;color:var(--champ)}
 footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;color:var(--faint);font-size:.8rem}
 @media(max-width:900px){.grid.ideas{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.grid.ideas,.grid.mood{grid-template-columns:1fr}}
+.subframe{width:100%;height:84vh;border:1px solid var(--line);border-radius:16px;background:var(--bg);display:block;margin-top:6px}
+@media(max-width:760px){.subframe{height:80vh}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
 </style>
@@ -132,20 +134,26 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
       <div class="tabs">
         <button class="tab on" id="tab-ideas" onclick="switchTab('ideas')">💡 الأفكار + Prompts</button>
         <button class="tab" id="tab-mood" onclick="switchTab('mood')">🎨 لوحات المزاج</button>
+        <button class="tab" id="tab-lib" onclick="switchTab('lib')">🗂️ ٣٠٠ فكرة</button>
+        <button class="tab" id="tab-ref" onclick="switchTab('ref')">🖼️ المراجع البصرية</button>
       </div>
     </header>
   </div>
 
-  <div class="controls">
+  <div class="controls" id="controls">
     <div class="wrap">
       <div class="search"><span class="ic">⌕</span><input id="q" type="search" placeholder="ابحث… (زواج، نجدي، ورد، رمضان، شركات…)" aria-label="بحث"></div>
       <div class="chips" id="chips"></div>
     </div>
   </div>
 
-  <div class="wrap">
+  <div class="wrap" id="gridWrap">
     <div class="count-line" id="countLine"></div>
     <div class="grid ideas" id="grid"></div>
+  </div>
+
+  <div class="wrap hidden" id="frameWrap">
+    <iframe id="subframe" class="subframe" title="مكتبة AB" loading="lazy"></iframe>
   </div>
 
   <footer><div class="wrap">© 2026 AB Events — The Art of Luxury Events · مكتبة الاستوديو الداخلية</div></footer>
@@ -411,11 +419,20 @@ const grid=document.getElementById('grid'),chipsEl=document.getElementById('chip
 const KEYS=[['💡','الإضاءة',3],['🌹','الورد',4],['🧵','الأقمشة',5],['🪑','الكراسي',6],['🍽️','الطاولات',7],['🖼️','الخلفية',8],['📐','الديكور',9],['📸','التصوير',10]];
 function data(){ return mode==='ideas'?IDEAS:MOOD; }
 function switchTab(m){
-  mode=m; active='الكل';
-  document.getElementById('tab-ideas').classList.toggle('on',m==='ideas');
-  document.getElementById('tab-mood').classList.toggle('on',m==='mood');
-  grid.className='grid '+(m==='ideas'?'ideas':'mood');
-  buildChips(); render();
+  ['ideas','mood','lib','ref'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('on',x===m));
+  const isGrid=(m==='ideas'||m==='mood');
+  document.getElementById('controls').classList.toggle('hidden',!isGrid);
+  document.getElementById('gridWrap').classList.toggle('hidden',!isGrid);
+  document.getElementById('frameWrap').classList.toggle('hidden',isGrid);
+  if(isGrid){
+    mode=m; active='الكل';
+    grid.className='grid '+(m==='ideas'?'ideas':'mood');
+    buildChips(); render();
+  } else {
+    const f=document.getElementById('subframe');
+    const src=(m==='lib'?'library.html':'references.html');
+    if(f.getAttribute('data-src')!==src){ f.src=src; f.setAttribute('data-src',src); }
+  }
 }
 function buildChips(){
   const cats=[...new Set(data().map(d=>d[0]))];
