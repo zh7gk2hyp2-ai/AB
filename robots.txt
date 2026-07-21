@@ -3,5 +3,6 @@ Allow: /
 Disallow: /admin
 Disallow: /admin.html
 Disallow: /studio-7fk29a
+Disallow: /bookings.html
 
 Sitemap: https://zh7gk2hyp2-ai.github.io/AB/sitemap.xml

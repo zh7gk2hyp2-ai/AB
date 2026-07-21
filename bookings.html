@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#0B0B0D"/>
+<title>الحجوزات — AB Events</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230B0B0D'/><text x='50' y='68' text-anchor='middle' font-size='44' fill='%23C9A24B' font-family='Georgia,serif' font-weight='700'>AB</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0c;--bg2:#111015;--card:#16141b;--card2:#1c1922;--ink:#ece7de;--soft:#a49d92;--faint:#726c64;--gold:#c9a24b;--champ:#e4cd8f;--gold-d:#9a7826;--coral:#c4623d;--sage:#8a936f;--line:rgba(233,222,201,.10);--line2:rgba(233,222,201,.06);--serif:'Cormorant Garamond',Georgia,serif;--body:'Alexandria','Segoe UI',Tahoma,system-ui,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;background-image:radial-gradient(60% 45% at 82% -5%,rgba(201,162,75,.10),transparent 60%)}
+.hidden{display:none!important}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+/* gate */
+#gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(60% 55% at 70% 20%,rgba(201,162,75,.12),transparent 60%),#0a0a0c}
+.gate-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:36px 30px;max-width:380px;width:100%;text-align:center}
+.mark{width:60px;height:60px;border-radius:15px;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(135deg,#1b1922,#0a0a0c);box-shadow:inset 0 0 0 1px rgba(201,162,75,.45);font-family:var(--serif);font-weight:600;font-size:1.7rem;color:var(--champ)}
+.gate-card h1{font-family:var(--serif);font-size:1.4rem;font-weight:600}
+.gate-card p{color:var(--soft);font-size:.82rem;margin-bottom:18px}
+.inp{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);font-family:var(--body);font-size:.95rem;margin-bottom:10px;outline:none}
+.inp:focus{border-color:var(--gold)}
+.btn{padding:11px 18px;border-radius:100px;border:none;cursor:pointer;font-weight:700;font-family:var(--body);font-size:.85rem;color:#0a0a0c;background:linear-gradient(120deg,var(--champ),var(--gold) 60%,var(--gold-d))}
+.btn.full{width:100%;margin-top:4px}
+.err{color:#e8908a;font-size:.8rem;min-height:1.1em;margin-top:6px}
+/* header */
+header{padding:26px 0 6px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;margin-inline-end:auto}
+.brand .m{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#1b1922,#0a0a0c);box-shadow:inset 0 0 0 1px rgba(201,162,75,.45);font-family:var(--serif);font-weight:600;font-size:1.2rem;color:var(--champ)}
+.brand b{font-size:.95rem;letter-spacing:1px;display:block;line-height:1.1}.brand span{font-size:.58rem;color:var(--champ);letter-spacing:2px;text-transform:uppercase}
+.ghost{padding:9px 15px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--soft);font-family:var(--body);font-size:.78rem;cursor:pointer;text-decoration:none}
+.ghost:hover{border-color:var(--gold-d);color:var(--ink)}
+h1.title{font-family:var(--serif);font-weight:600;font-size:1.9rem;margin:14px 0 2px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.stat b{font-family:var(--serif);font-size:1.7rem;color:var(--champ);display:block;line-height:1}
+.stat span{font-size:.74rem;color:var(--soft)}
+/* toolbar */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 14px}
+.search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:100px;padding:9px 16px}
+.search input{flex:1;background:none;border:none;color:var(--ink);font-family:var(--body);font-size:.9rem;outline:none}
+select.f,.tool{padding:9px 14px;border-radius:100px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--body);font-size:.82rem;cursor:pointer}
+.tool:hover{border-color:var(--gold-d)}
+/* cloud bar */
+.cloud{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:.82rem;color:var(--soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.cloud b{color:var(--champ)}
+.cloud a.btn{text-decoration:none;color:#0a0a0c;padding:8px 14px}
+/* table */
+.twrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th,td{padding:11px 12px;text-align:right;font-size:.82rem;border-bottom:1px solid var(--line2);vertical-align:top}
+th{background:var(--card);color:var(--gold-d);font-weight:600;font-size:.72rem;letter-spacing:.5px;position:sticky;top:0;white-space:nowrap}
+tr:hover td{background:rgba(255,255,255,.02)}
+.bid{font-family:var(--mono);font-size:.68rem;color:var(--faint)}
+.nm{font-weight:600}
+td .sub{color:var(--faint);font-size:.72rem}
+.stsel{padding:5px 10px;border-radius:100px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font-family:var(--body);font-size:.74rem;cursor:pointer}
+.st-جديد{color:#e4cd8f}.st-مؤكّد{color:#8ab4e8}.st-منفّذ{color:#8a936f}.st-ملغى{color:#e8908a}
+.rowacts{display:flex;gap:6px;white-space:nowrap}
+.ic{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--soft);cursor:pointer;font-size:.85rem}
+.ic:hover{border-color:var(--gold-d);color:var(--ink)}
+.ic.del:hover{border-color:var(--coral);color:#e8908a}
+.empty{text-align:center;color:var(--faint);padding:50px 0}
+footer{padding:22px 0;text-align:center;color:var(--faint);font-size:.72rem}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="mark">AB</div>
+    <h1>لوحة الحجوزات</h1>
+    <p>دخول خاص بفريق AB Events</p>
+    <input class="inp" id="gp" type="password" placeholder="كلمة المرور" autocomplete="current-password"/>
+    <button class="btn full" onclick="tryLogin()">دخول</button>
+    <div class="err" id="gerr"></div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div class="wrap">
+    <header>
+      <div class="brand"><div class="m">AB</div><div><b>AB EVENTS</b><span>Bookings</span></div></div>
+      <a class="ghost" href="index.html">← الموقع</a>
+      <button class="ghost" onclick="logout()">خروج ⏻</button>
+    </header>
+    <h1 class="title">الحجوزات</h1>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="cloud" id="cloud">
+      <span>☁️ <b>الحجوزات عبر الأجهزة:</b> تُحفظ في Google Sheet عند تفعيل الربط.</span>
+      <a class="btn" id="sheetBtn" href="#" target="_blank" rel="noopener" style="display:none">افتح جدول الحجوزات ↗</a>
+      <button class="tool" onclick="setSheet()">ضبط رابط الجدول</button>
+      <span style="font-size:.74rem">هذه اللوحة تعرض الحجوزات المحفوظة على هذا الجهاز · الخطوات في BOOKINGS-SETUP.md</span>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><span>⌕</span><input id="q" type="search" placeholder="ابحث بالاسم، الجوال، النوع، المدينة…"></div>
+      <select class="f" id="fstatus"><option value="">كل الحالات</option><option>جديد</option><option>مؤكّد</option><option>منفّذ</option><option>ملغى</option></select>
+      <button class="tool" onclick="exportCSV()">⬇ تصدير CSV</button>
+      <button class="tool" onclick="addManual()">＋ حجز يدوي</button>
+    </div>
+
+    <div class="twrap">
+      <table>
+        <thead><tr>
+          <th>#</th><th>العميل</th><th>النوع / الباقة</th><th>التاريخ</th><th>الضيوف</th><th>المدينة</th><th>التفاصيل</th><th>الحالة</th><th>إجراءات</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="empty">لا توجد حجوزات محفوظة على هذا الجهاز بعد.</div>
+
+    <footer>© 2026 AB Events — لوحة الحجوزات الداخلية · الحجوزات الحيّة تصل أيضاً عبر واتساب</footer>
+  </div>
+</div>
+
+<script>
+/* ══ بوابة (بصمة SHA-256، الكلمة غير ظاهرة) ══ */
+const PASS_HASH="ff8a90b9fac6929b7f89ad2866aa95ddb06a11bb883066816c230aa3d15dcc9a";
+const SS="ab_bookings_auth", LS="ab_bookings", STLS="ab_bookings_status", SHEET_LS="ab_sheet_url";
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+async function tryLogin(){
+  try{ const h=await sha256(document.getElementById('gp').value);
+    if(h===PASS_HASH){ sessionStorage.setItem(SS,'1'); reveal(); }
+    else document.getElementById('gerr').textContent='كلمة المرور غير صحيحة';
+  }catch(e){ document.getElementById('gerr').textContent='استخدم متصفحاً حديثاً على HTTPS'; }
+}
+function reveal(){ document.getElementById('gate').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); render(); }
+function logout(){ sessionStorage.removeItem(SS); location.reload(); }
+document.getElementById('gp').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
+if(sessionStorage.getItem(SS)==='1') reveal();
+
+/* ══ بيانات ══ */
+const WA="966507762024";
+function load(){ try{return JSON.parse(localStorage.getItem(LS)||'[]');}catch(_){return[];} }
+function save(a){ localStorage.setItem(LS,JSON.stringify(a)); }
+function statusMap(){ try{return JSON.parse(localStorage.getItem(STLS)||'{}');}catch(_){return{};} }
+function setStatus(id,v){ const m=statusMap(); m[id]=v; localStorage.setItem(STLS,JSON.stringify(m)); const a=load(); const b=a.find(x=>x.id===id); if(b){b.status=v; save(a);} render(); }
+function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(iso){ try{ const d=new Date(iso); return d.toLocaleDateString('ar-SA')+' · '+d.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});}catch(_){return iso;} }
+
+const qEl=document.getElementById('q'), fEl=document.getElementById('fstatus');
+qEl.addEventListener('input',render); fEl.addEventListener('change',render);
+
+function current(){
+  const m=statusMap();
+  return load().map(b=>({...b,status:m[b.id]||b.status||'جديد'}));
+}
+function render(){
+  const all=current();
+  // stats
+  const c={total:all.length,'جديد':0,'مؤكّد':0,'منفّذ':0,'ملغى':0};
+  all.forEach(b=>{c[b.status]=(c[b.status]||0)+1;});
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><b>${c.total}</b><span>إجمالي الحجوزات</span></div>
+    <div class="stat"><b style="color:#e4cd8f">${c['جديد']}</b><span>جديدة</span></div>
+    <div class="stat"><b style="color:#8ab4e8">${c['مؤكّد']}</b><span>مؤكّدة</span></div>
+    <div class="stat"><b style="color:#8a936f">${c['منفّذ']}</b><span>منفّذة</span></div>`;
+  // sheet button
+  const url=localStorage.getItem(SHEET_LS); const sb=document.getElementById('sheetBtn');
+  if(url){ sb.href=url; sb.style.display='inline-block'; } else sb.style.display='none';
+  // filter
+  const q=qEl.value.trim().toLowerCase(), fs=fEl.value;
+  const items=all.filter(b=>(!fs||b.status===fs)&&(!q||[b.name,b.phone,b.type,b.pkg,b.city,b.details].join(' ').toLowerCase().includes(q)));
+  const rows=document.getElementById('rows'), empty=document.getElementById('empty');
+  empty.classList.toggle('hidden',all.length>0);
+  rows.innerHTML=items.map(b=>{
+    const wa=`https://wa.me/${(b.phone||'').replace(/[^0-9]/g,'').replace(/^0/,'966')}`;
+    const opts=['جديد','مؤكّد','منفّذ','ملغى'].map(s=>`<option ${s===b.status?'selected':''}>${s}</option>`).join('');
+    return `<tr>
+      <td><span class="bid">${esc(b.id)}</span><div class="sub">${fmtDate(b.ts)}</div></td>
+      <td><div class="nm">${esc(b.name)}</div><div class="sub" dir="ltr" style="text-align:right">${esc(b.phone)}</div></td>
+      <td>${esc(b.type)||'—'}${b.pkg?`<div class="sub">${esc(b.pkg)}</div>`:''}</td>
+      <td>${esc(b.date)||'—'}</td>
+      <td>${esc(b.guests)||'—'}</td>
+      <td>${esc(b.city)||'—'}</td>
+      <td style="max-width:220px">${esc(b.details)||'—'}</td>
+      <td><select class="stsel st-${b.status}" onchange="setStatus('${b.id}',this.value)">${opts}</select></td>
+      <td><div class="rowacts">
+        <a class="ic" href="${wa}" target="_blank" rel="noopener" title="رد واتساب">💬</a>
+        <button class="ic del" onclick="del('${b.id}')" title="حذف">🗑</button>
+      </div></td>
+    </tr>`;}).join('');
+}
+function del(id){ if(!confirm('حذف هذا الحجز؟ (من هذا الجهاز فقط)'))return; save(load().filter(b=>b.id!==id)); render(); }
+function addManual(){
+  const name=prompt('اسم العميل:'); if(!name)return;
+  const phone=prompt('جوال العميل:')||'';
+  const type=prompt('نوع الفعالية:')||'';
+  const b={id:'BK-'+Date.now().toString(36).toUpperCase(),ts:new Date().toISOString(),name,phone,type,date:'',pkg:'',guests:'',city:'',details:'(أُضيف يدوياً)',status:'جديد'};
+  const a=load(); a.unshift(b); save(a); render();
+}
+function setSheet(){
+  const cur=localStorage.getItem(SHEET_LS)||'';
+  const u=prompt('ألصق رابط Google Sheet الخاص بالحجوزات:',cur);
+  if(u!==null){ if(u.trim()) localStorage.setItem(SHEET_LS,u.trim()); else localStorage.removeItem(SHEET_LS); render(); }
+}
+function exportCSV(){
+  const a=current(); if(!a.length){alert('لا توجد حجوزات للتصدير');return;}
+  const cols=['id','ts','name','phone','type','pkg','date','guests','city','details','status'];
+  const head=['رقم','الوقت','الاسم','الجوال','النوع','الباقة','التاريخ','الضيوف','المدينة','التفاصيل','الحالة'];
+  const esc2=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const csv='﻿'+[head.join(','),...a.map(b=>cols.map(c=>esc2(b[c])).join(','))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const u=URL.createObjectURL(blob);
+  const link=document.createElement('a'); link.href=u; link.download='AB-bookings-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(link); link.click(); link.remove(); setTimeout(()=>URL.revokeObjectURL(u),3000);
+}
+</script>
+</body>
+</html>

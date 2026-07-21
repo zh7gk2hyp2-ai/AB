@@ -736,7 +736,18 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
           </div>
           <div class="field"><label for="date">التاريخ (اختياري)</label><input id="date" name="date" type="date"></div>
         </div>
-        <div class="field"><label for="details">تفاصيل الفعالية</label><textarea id="details" name="details" placeholder="عدد الضيوف، المكان، الثيم المفضّل، الميزانية التقريبية..."></textarea></div>
+        <div class="row-2">
+          <div class="field"><label for="pkg">الباقة</label>
+            <select id="pkg" name="pkg">
+              <option value="" disabled selected>اختر الباقة</option>
+              <option>البكج الوردي (4600)</option><option>بكج الأورنج والخشب البني (3500)</option>
+              <option>باقة مخصّصة</option><option>غير محدّد بعد</option>
+            </select>
+          </div>
+          <div class="field"><label for="guests">عدد الضيوف (اختياري)</label><input id="guests" name="guests" type="number" min="1" placeholder="مثال: 50"></div>
+        </div>
+        <div class="field"><label for="city">المدينة / المكان (اختياري)</label><input id="city" name="city" placeholder="الطائف — اسم القاعة/الاستراحة"></div>
+        <div class="field"><label for="details">تفاصيل الفعالية</label><textarea id="details" name="details" placeholder="الثيم المفضّل، الميزانية التقريبية، أي طلبات خاصة..."></textarea></div>
         <button type="submit" class="btn btn-wa" data-cursor>إرسال الطلب عبر واتساب 💬</button>
         <small class="hint">بإرسالك الطلب توافق على تواصلنا معك عبر واتساب أو الهاتف.</small>
       </form>
@@ -799,6 +810,8 @@ let CONFIG = {
   whatsapp: "966507762024",   // رقم واتساب بصيغة دولية بدون +
   phone:    "+966507762024",  // رقم الاتصال
   email:    "hello@abevents.sa",
+  // لتفعيل حفظ الحجوزات في السحابة (Google Apps Script) — ضع رابط الويب أب هنا. الخطوات في BOOKINGS-SETUP.md
+  bookingsEndpoint: "",
 };
 
 /* ═════ palette helper for placeholder covers ═════ */
@@ -895,6 +908,11 @@ const VIDEOS=[
   {f:'vid-11',cap:'تنسيق ورد برتقالي خارجي'},
   {f:'vid-12',cap:'ستاند تخرّج بقماش ذهبي'},
   {f:'vid-13',cap:'تخرّج دفعة ٢٠٢٦'},
+  {f:'vid-14',cap:'بوفيه تمر وضيافة فاخر'},
+  {f:'vid-15',cap:'مدخل فيلا بقوس أنيق'},
+  {f:'vid-16',cap:'طاولة عشاء خارجية ممتدة'},
+  {f:'vid-17',cap:'ركن احتفال عائلي بالبالون'},
+  {f:'vid-18',cap:'ركن جلسة بوهيمي بأرجوحة'},
 ];
 const vidGrid=document.getElementById('vidGrid');
 if(vidGrid){
@@ -1001,11 +1019,28 @@ function wireContact(){
   if(mc)mc.href='tel:'+CONFIG.phone;
 }
 wireContact();
-document.getElementById('bookForm').addEventListener('submit',e=>{
+document.getElementById('bookForm').addEventListener('submit',async e=>{
   e.preventDefault();const f=e.target;
-  const msg=`✦ طلب حجز جديد — AB Events\n\nالاسم: ${f.name.value}\nالجوال: ${f.phone.value}\nنوع الفعالية: ${f.type.value}\n`+
-    (f.date.value?`التاريخ: ${f.date.value}\n`:'')+(f.details.value?`التفاصيل: ${f.details.value}\n`:'');
+  const b={
+    id:'BK-'+Date.now().toString(36).toUpperCase(),
+    ts:new Date().toISOString(),
+    name:f.name.value.trim(), phone:f.phone.value.trim(), type:f.type.value,
+    date:f.date.value||'', pkg:(f.pkg&&f.pkg.value)||'', guests:(f.guests&&f.guests.value)||'',
+    city:(f.city&&f.city.value.trim())||'', details:f.details.value.trim(), status:'جديد'
+  };
+  // 1) حفظ محلي
+  try{ const a=JSON.parse(localStorage.getItem('ab_bookings')||'[]'); a.unshift(b); localStorage.setItem('ab_bookings',JSON.stringify(a)); }catch(_){}
+  // 2) إرسال للسحابة إن كان الرابط مضبوطاً (لا يوقف التدفّق لو فشل)
+  if(CONFIG.bookingsEndpoint){
+    try{ fetch(CONFIG.bookingsEndpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(b)}); }catch(_){}
+  }
+  // 3) رسالة واتساب (القناة الفورية)
+  const msg=`✦ طلب حجز جديد — AB Events\n\nرقم الطلب: ${b.id}\nالاسم: ${b.name}\nالجوال: ${b.phone}\nنوع الفعالية: ${b.type}\n`+
+    (b.pkg?`الباقة: ${b.pkg}\n`:'')+(b.date?`التاريخ: ${b.date}\n`:'')+(b.guests?`عدد الضيوف: ${b.guests}\n`:'')+
+    (b.city?`المكان: ${b.city}\n`:'')+(b.details?`التفاصيل: ${b.details}\n`:'');
   window.open(waLink(msg),'_blank');
+  const hint=f.querySelector('.hint'); if(hint){ hint.textContent='✓ تم استلام طلبك — سيتم فتح واتساب لإتمام الإرسال. رقم طلبك: '+b.id; hint.style.color='#8a936f'; }
+  f.reset();
 });
 
 /* ═════ CMS: apply content.json (progressive enhancement — site works without it) ═════ */
