@@ -136,6 +136,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
         <button class="tab" id="tab-mood" onclick="switchTab('mood')">🎨 لوحات المزاج</button>
         <button class="tab" id="tab-lib" onclick="switchTab('lib')">🗂️ ٣٠٠ فكرة</button>
         <button class="tab" id="tab-ref" onclick="switchTab('ref')">🖼️ المراجع البصرية</button>
+        <button class="tab" id="tab-trends" onclick="switchTab('trends')">🧭 اتجاهات ٢٠٢٦</button>
       </div>
     </header>
   </div>
@@ -419,7 +420,7 @@ const grid=document.getElementById('grid'),chipsEl=document.getElementById('chip
 const KEYS=[['💡','الإضاءة',3],['🌹','الورد',4],['🧵','الأقمشة',5],['🪑','الكراسي',6],['🍽️','الطاولات',7],['🖼️','الخلفية',8],['📐','الديكور',9],['📸','التصوير',10]];
 function data(){ return mode==='ideas'?IDEAS:MOOD; }
 function switchTab(m){
-  ['ideas','mood','lib','ref'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('on',x===m));
+  ['ideas','mood','lib','ref','trends'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('on',x===m));
   const isGrid=(m==='ideas'||m==='mood');
   document.getElementById('controls').classList.toggle('hidden',!isGrid);
   document.getElementById('gridWrap').classList.toggle('hidden',!isGrid);
@@ -430,7 +431,7 @@ function switchTab(m){
     buildChips(); render();
   } else {
     const f=document.getElementById('subframe');
-    const src=(m==='lib'?'library.html':'references.html');
+    const src=(m==='lib'?'library.html':m==='ref'?'references.html':'trends.html');
     if(f.getAttribute('data-src')!==src){ f.src=src; f.setAttribute('data-src',src); }
   }
 }
