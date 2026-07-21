@@ -154,6 +154,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
         <button class="tab" id="tab-ref" onclick="switchTab('ref')">🖼️ المراجع البصرية</button>
         <button class="tab" id="tab-trends" onclick="switchTab('trends')">🧭 اتجاهات ٢٠٢٦</button>
         <button class="tab" id="tab-identity" onclick="switchTab('identity')">✒️ الهوية</button>
+        <button class="tab" id="tab-packages" onclick="switchTab('packages')">💰 الباقات</button>
         <button class="tab" id="tab-play" onclick="switchTab('play')">📘 الدليل الاستراتيجي</button>
       </div>
     </header>
@@ -179,7 +180,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
       <div class="ixcard"><div class="ixrow"><span class="ixno">08</span><span class="ixst">مكتمل</span></div><h4>رحلة العميل + الرسائل</h4><p>١١ خطوة و٩ رسائل واتساب جاهزة للنسخ.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
       <div class="ixcard"><div class="ixrow"><span class="ixno">09</span><span class="ixst">مكتمل</span></div><h4>خطة التسويق ١٢ شهر</h4><p>تقويم محتوى سنوي وأنواع المحتوى الأسبوعي.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
       <div class="ixcard"><div class="ixrow"><span class="ixno">10</span><span class="ixst">مكتمل</span></div><h4>الذكاء الاصطناعي</h4><p>٦ استخدامات عملية للـ AI في إدارة وتسويق الأعمال.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
-      <div class="ixcard"><div class="ixrow"><span class="ixno">11</span><span class="ixst">مكتمل</span></div><h4>الباقات والأسعار</h4><p>٥ باقات بأسعار ريال سعودي من الاقتصادية إلى الملكية.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">11</span><span class="ixst">مكتمل</span></div><h4>الباقات والأسعار</h4><p>الباقات المعتمدة الحقيقية (الوردي ٤٦٠٠ · الأورنج ٣٥٠٠) + حجز واتساب.</p><button class="ixgo" onclick="switchTab('packages')">افتح الباقات ←</button></div>
       <div class="ixcard"><div class="ixrow"><span class="ixno">12</span><span class="ixst">مكتمل</span></div><h4>مكتبة ٣٠٠ فكرة</h4><p>مكتبة قابلة للفلترة بـ٦ محاور + صور AB الحقيقية.</p><button class="ixgo" onclick="switchTab('lib')">افتح ←</button></div>
       <div class="ixcard"><div class="ixrow"><span class="ixno">13</span><span class="ixst">مكتمل</span></div><h4>الهوية البصرية</h4><p>دليل الشعار، الألوان، الخطوط، نبرة الصوت والتطبيقات.</p><button class="ixgo" onclick="switchTab('identity')">افتح ←</button></div>
       <div class="ixcard"><div class="ixrow"><span class="ixno">14</span><span class="ixst">مكتمل</span></div><h4>خطة التنفيذ</h4><p>خطة تنفيذ من ٤ مراحل لإطلاق كل ما سبق.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
@@ -458,7 +459,7 @@ const grid=document.getElementById('grid'),chipsEl=document.getElementById('chip
 const KEYS=[['💡','الإضاءة',3],['🌹','الورد',4],['🧵','الأقمشة',5],['🪑','الكراسي',6],['🍽️','الطاولات',7],['🖼️','الخلفية',8],['📐','الديكور',9],['📸','التصوير',10]];
 function data(){ return mode==='ideas'?IDEAS:MOOD; }
 function switchTab(m){
-  ['overview','ideas','mood','lib','ref','trends','identity','play'].forEach(x=>{var el=document.getElementById('tab-'+x);if(el)el.classList.toggle('on',x===m);});
+  ['overview','ideas','mood','lib','ref','trends','identity','packages','play'].forEach(x=>{var el=document.getElementById('tab-'+x);if(el)el.classList.toggle('on',x===m);});
   const isGrid=(m==='ideas'||m==='mood');
   const isIndex=(m==='overview');
   document.getElementById('indexWrap').classList.toggle('hidden',!isIndex);
@@ -471,7 +472,7 @@ function switchTab(m){
     buildChips(); render();
   } else if(!isIndex){
     const f=document.getElementById('subframe');
-    const map={lib:'library.html',ref:'references.html',trends:'trends.html',identity:'identity.html',play:'playbook.html'};
+    const map={lib:'library.html',ref:'references.html',trends:'trends.html',identity:'identity.html',packages:'packages.html',play:'playbook.html'};
     const src=map[m];
     if(src && f.getAttribute('data-src')!==src){ f.src=src; f.setAttribute('data-src',src); }
   }
