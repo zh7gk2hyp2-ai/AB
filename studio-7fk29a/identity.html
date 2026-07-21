@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#0a0a0c"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<title>AB Events — دليل الهوية البصرية (المرحلة ١٣)</title>
+<style>
+:root{--bg:#0a0a0c;--bg2:#111015;--card:#16141b;--card2:#1c1922;--ink:#ece7de;--soft:#a49d92;--faint:#726c64;--gold:#c9a24b;--champ:#e4cd8f;--gold-d:#9a7826;--coral:#c4623d;--sage:#8a936f;--line:rgba(233,222,201,.10);--line2:rgba(233,222,201,.06);--serif:'Cormorant Garamond',Georgia,serif;--body:'Alexandria','Segoe UI',Tahoma,system-ui,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;background-image:radial-gradient(60% 45% at 82% -5%,rgba(201,162,75,.10),transparent 60%),radial-gradient(55% 40% at 0% 100%,rgba(196,98,61,.08),transparent 60%)}
+::selection{background:var(--gold);color:#0a0a0c}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{padding:34px 0 8px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .m{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#1b1922,#0a0a0c);box-shadow:inset 0 0 0 1px rgba(201,162,75,.45);font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--champ)}
+.brand b{font-size:1rem;letter-spacing:1px;display:block;line-height:1.1}
+.brand span{font-size:.6rem;color:var(--champ);letter-spacing:2px;text-transform:uppercase}
+.eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);margin-top:22px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,5vw,3rem);line-height:1.08;margin-top:6px}
+h1 .it{font-style:italic;color:var(--champ)}
+.sub{color:var(--soft);max-width:640px;margin-top:10px;font-size:.95rem}
+section{margin:34px 0;padding-top:22px;border-top:1px solid var(--line)}
+.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.sh .no{font-family:var(--mono);font-size:.72rem;color:var(--gold-d)}
+.sh h2{font-family:var(--serif);font-weight:600;font-size:1.7rem}
+.sh .en{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+/* logo lockups */
+.locks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.locks{grid-template-columns:1fr}}
+.lock{border:1px solid var(--line);border-radius:16px;padding:26px;display:grid;place-items:center;min-height:150px;text-align:center}
+.lock.light{background:#f3f1ea}
+.lock.dark{background:#0B0B0D}
+.lock.gold{background:linear-gradient(135deg,#1b1922,#0a0a0c)}
+.mark{width:66px;height:66px;border-radius:16px;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:2rem;letter-spacing:1px}
+.mark.on-dark{background:linear-gradient(135deg,#1b1922,#0a0a0c);color:var(--champ);box-shadow:inset 0 0 0 1px rgba(201,162,75,.5)}
+.mark.on-light{background:transparent;color:#0B0B0D}
+.word{margin-top:12px;font-family:var(--serif);font-size:1.5rem;letter-spacing:3px}
+.word small{display:block;font-family:var(--body);font-size:.55rem;letter-spacing:4px;text-transform:uppercase;margin-top:3px}
+.cap{font-size:.7rem;color:var(--faint);margin-top:10px}
+/* swatches */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
+@media(max-width:760px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.sgrid{grid-template-columns:1fr}}
+.sc{display:flex;gap:11px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:10px}
+.sc .chip{width:44px;height:44px;border-radius:10px;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.scb b{font-size:.84rem;display:block}
+.scb code{font-family:var(--mono);font-size:.68rem;color:var(--champ)}
+.scb span{font-size:.68rem;color:var(--soft);display:block}
+.slabel{font-size:.72rem;letter-spacing:1px;color:var(--gold-d);text-transform:uppercase;margin:14px 0 8px}
+/* type */
+.type{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:12px}
+.type .big{font-family:var(--serif);font-size:2.6rem;line-height:1.1}
+.type .big .it{font-style:italic;color:var(--champ)}
+.type .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:8px;flex-wrap:wrap}
+.type .meta{font-size:.72rem;color:var(--faint);font-family:var(--mono)}
+.type .ar{font-size:1.5rem}
+.type .lat{font-family:'Manrope',system-ui;font-size:1.3rem;letter-spacing:.3px}
+/* two-col do/dont & lists */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+.box.good{border-color:rgba(138,147,111,.4)}
+.box.bad{border-color:rgba(196,98,61,.35)}
+.box h4{font-size:.9rem;margin-bottom:9px}
+.box.good h4{color:#a8b487} .box.bad h4{color:#e0977a}
+.box ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.box li{font-size:.82rem;color:var(--soft);padding-inline-start:20px;position:relative}
+.box.good li::before{content:"✓";position:absolute;inset-inline-start:0;color:#a8b487}
+.box.bad li::before{content:"✕";position:absolute;inset-inline-start:0;color:#e0977a}
+/* applications */
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.apps{grid-template-columns:1fr}}
+.ap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+.ap .canvas{aspect-ratio:1;display:grid;place-items:center;position:relative;background:linear-gradient(155deg,#0B0B0D,#15121a 55%,#0B0B0D)}
+.ap .canvas.rose{background:linear-gradient(150deg,#2a1712,#c4623d 120%)}
+.ap .canvas.card{aspect-ratio:1.7;background:linear-gradient(135deg,#16141b,#0B0B0D)}
+.ap .lg{font-family:var(--serif);font-size:2rem;color:var(--champ);letter-spacing:2px}
+.ap .tg{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--ink)}
+.ap .cn{padding:11px 14px;font-size:.75rem;color:var(--soft);border-top:1px solid var(--line)}
+.ap .mini{position:absolute;bottom:12px;font-size:.5rem;letter-spacing:3px;color:rgba(233,222,201,.6);text-transform:uppercase}
+footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:var(--faint);font-size:.75rem;margin-top:24px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="brand"><div class="m">AB</div><div><b>AB EVENTS</b><span>Creative Library · Stage 13</span></div></div>
+  <div class="eyebrow">المرحلة ١٣ · الهوية البصرية</div>
+  <h1>دليل <span class="it">الهوية</span></h1>
+  <p class="sub">المرجع الرسمي لعلامة AB Events — الشعار، الألوان، الخطوط، نبرة الصوت، والتطبيقات. الهدف: اتساق كامل عبر كل نقطة تواصل عشان تُبنى الفخامة بالتكرار.</p>
+</header>
+
+<section>
+  <div class="sh"><span class="no">01</span><h2>الشعار</h2><span class="en">Logo & Lockups</span></div>
+  <div class="locks">
+    <div class="lock gold"><div><div class="mark on-dark">AB</div><div class="cap">الأساسي — على الداكن</div></div></div>
+    <div class="lock light"><div><div class="mark on-light">AB</div><div class="cap" style="color:#5a5148">على الفاتح</div></div></div>
+    <div class="lock dark"><div><div class="word" style="color:var(--champ)">AB<small style="color:var(--soft)">The Art of Luxury Events</small></div><div class="cap">النسخة الأفقية بالكلمة</div></div></div>
+  </div>
+  <div class="two" style="margin-top:14px">
+    <div class="box good"><h4>افعل</h4><ul><li>اترك مساحة فراغ حول الشعار = ارتفاع الحرف تقريبًا</li><li>استخدم النسخة الذهبية على الخلفيات الداكنة</li><li>حافظ على الحد الأدنى للحجم ٣٢ بكسل عرضًا</li></ul></div>
+    <div class="box bad"><h4>لا تفعل</h4><ul><li>لا تمطّط أو تشوّه النِّسب</li><li>لا تغيّر ألوان الشعار أو تضيف ظلال ثقيلة</li><li>لا تضعه على خلفية مزدحمة تُضعف الوضوح</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="no">02</span><h2>نظام الألوان</h2><span class="en">Colour System</span></div>
+  <div class="slabel">الأساسية — Primary</div>
+  <div class="sgrid"><div class="sc">
+      <div class="chip" style="background:#0B0B0D"></div>
+      <div class="scb"><b>أوبسيديان</b><code>#0B0B0D</code><span>الخلفية الأساسية</span></div></div><div class="sc">
+      <div class="chip" style="background:#16141B"></div>
+      <div class="scb"><b>فحمي عميق</b><code>#16141B</code><span>البطاقات والأسطح</span></div></div><div class="sc">
+      <div class="chip" style="background:#C9A24B"></div>
+      <div class="scb"><b>ذهب الشامبين</b><code>#C9A24B</code><span>اللون الأساسي · التوقيع</span></div></div><div class="sc">
+      <div class="chip" style="background:#E4CD8F"></div>
+      <div class="scb"><b>شامبين فاتح</b><code>#E4CD8F</code><span>الإبراز والتدرّج</span></div></div><div class="sc">
+      <div class="chip" style="background:#9A7826"></div>
+      <div class="scb"><b>ذهب غامق</b><code>#9A7826</code><span>عمق الذهب والحدود</span></div></div></div>
+  <div class="slabel">الثانوية — Secondary (وردة الطائف)</div>
+  <div class="sgrid"><div class="sc">
+      <div class="chip" style="background:#C4623D"></div>
+      <div class="scb"><b>وردة الطائف</b><code>#C4623D</code><span>اللون المميّز المحلّي</span></div></div><div class="sc">
+      <div class="chip" style="background:#E0A47F"></div>
+      <div class="scb"><b>طين دافئ</b><code>#E0A47F</code><span>لمسة دافئة ثانوية</span></div></div><div class="sc">
+      <div class="chip" style="background:#8A936F"></div>
+      <div class="scb"><b>سِج / أوكالبتوس</b><code>#8A936F</code><span>الأخضر الطبيعي</span></div></div></div>
+  <div class="slabel">المحايدة — Neutrals</div>
+  <div class="sgrid"><div class="sc">
+      <div class="chip" style="background:#ECE7DE"></div>
+      <div class="scb"><b>عاجي</b><code>#ECE7DE</code><span>النص الأساسي</span></div></div><div class="sc">
+      <div class="chip" style="background:#A49D92"></div>
+      <div class="scb"><b>توب ناعم</b><code>#A49D92</code><span>النص الثانوي</span></div></div><div class="sc">
+      <div class="chip" style="background:#726C64"></div>
+      <div class="scb"><b>خافت</b><code>#726C64</code><span>نص خافت / حدود</span></div></div></div>
+  <div class="box" style="margin-top:12px;font-size:.82rem;color:var(--soft)"><b style="color:var(--champ)">قاعدة النِّسب ٦٠·٣٠·١٠:</b> ٦٠٪ داكن (أوبسيديان/فحمي) · ٣٠٪ محايد عاجي · ١٠٪ ذهب شامبين كتوقيع. وردة الطائف والسِج لمسات مميّزة عند الحاجة.</div>
+</section>
+
+<section>
+  <div class="sh"><span class="no">03</span><h2>الخطوط</h2><span class="en">Typography</span></div>
+  <div class="type">
+    <div class="big">The Art of <span class="it">Luxury</span> Events</div>
+    <div class="row"><span class="meta">Cormorant Garamond · العناوين والأرقام الكبيرة · Regular/Italic 600</span></div>
+  </div>
+  <div class="type">
+    <div class="ar">نصنع لحظاتكم الاستثنائية بلمسة فاخرة</div>
+    <div class="row"><span class="meta">Alexandria · النصوص العربية · 300 / 400 / 600 / 700</span></div>
+  </div>
+  <div class="type">
+    <div class="lat">Taif · Saudi Arabia — Events, Styling & Design</div>
+    <div class="row"><span class="meta">Manrope · النصوص اللاتينية والأرقام · 400 / 600</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="no">04</span><h2>نبرة الصوت</h2><span class="en">Tone of Voice</span></div>
+  <p class="sub" style="margin-bottom:14px">الشخصية: <b style="color:var(--ink)">فخمة · دافئة · واثقة · مختصرة</b>. نتكلّم كمصمّم راقٍ يهتمّ بالتفاصيل، لا كبائع.</p>
+  <div class="two">
+    <div class="box good"><h4>نقول</h4><ul><li>«نصنع لحظاتكم الاستثنائية»</li><li>لغة راقية مختصرة تركّز على التجربة والتفاصيل</li><li>دعوة هادئة للتواصل: «نسعد بخدمتكم»</li></ul></div>
+    <div class="box bad"><h4>نتجنّب</h4><ul><li>المبالغة والوعود المطلقة («الأفضل في العالم»)</li><li>الإيموجي الزائد والعلامات الكثيرة</li><li>لغة الضغط والاستعجال الرخيصة</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="no">05</span><h2>أسلوب التصوير</h2><span class="en">Photography</span></div>
+  <div class="box" style="font-size:.85rem;color:var(--soft)">إضاءة دافئة تحريرية، عمق ميدان ضحل، تركيز على التفاصيل (الورد، الضيافة، الملمس). لوحة وردة الطائف الترابية هي التوقيع البصري. صور حقيقية من الفعاليات > الصور النمطية. حافظ على العلامة المائية AB بخفّة في الزاوية.</div>
+</section>
+
+<section>
+  <div class="sh"><span class="no">06</span><h2>تطبيقات</h2><span class="en">Applications</span></div>
+  <div class="apps">
+    <div class="ap"><div class="canvas"><div class="lg">AB</div><div class="mini">The Art of Luxury Events</div></div><div class="cn">منشور إنستغرام — الهوية الداكنة</div></div>
+    <div class="ap"><div class="canvas rose"><div class="tg">نصنع لحظاتكم<br>الاستثنائية</div><div class="mini">abevents · Taif</div></div><div class="cn">ستوري — لوحة وردة الطائف</div></div>
+    <div class="ap"><div class="canvas card"><div class="lg" style="font-size:1.5rem">AB</div><div class="mini">0507762024 · abevents.sa</div></div><div class="cn">بطاقة أعمال</div></div>
+  </div>
+</section>
+
+<footer>© 2026 AB Events — The Art of Luxury Events · دليل الهوية الداخلي</footer>
+</div>
+
+</body>
+</html>

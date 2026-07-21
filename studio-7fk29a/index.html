@@ -51,7 +51,22 @@ header{padding:34px 0 8px}
 h2.title{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.1;margin-top:8px}
 h2.title .it{font-style:italic;color:var(--champ)}
 /* tabs + controls */
-.tabs{display:flex;gap:8px;margin-top:20px}
+.tabs{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.idxh{margin:14px 0 4px}
+.idxh .t{font-family:var(--serif);font-size:1.5rem;font-weight:600}
+.idxh .s{color:var(--soft);font-size:.85rem}
+.idxgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:14px 0 40px}
+@media(max-width:900px){.idxgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.idxgrid{grid-template-columns:1fr}}
+.ixcard{background:linear-gradient(180deg,var(--card),#0e0d12);border:1px solid var(--line);border-radius:15px;padding:15px 16px;display:flex;flex-direction:column;gap:7px;transition:.2s}
+.ixcard:hover{border-color:rgba(201,162,75,.45);transform:translateY(-2px)}
+.ixrow{display:flex;align-items:center;justify-content:space-between}
+.ixno{font-family:var(--mono);font-size:.7rem;color:var(--gold-d)}
+.ixst{font-size:.58rem;padding:2px 9px;border-radius:100px;border:1px solid rgba(138,147,111,.4);color:#a8b487}
+.ixcard h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;line-height:1.2}
+.ixcard p{font-size:.76rem;color:var(--soft);flex:1;margin:0}
+.ixgo{margin-top:5px;align-self:flex-start;padding:7px 15px;border-radius:100px;border:1px solid rgba(201,162,75,.35);background:rgba(201,162,75,.08);color:var(--champ);font-family:var(--body);font-size:.75rem;cursor:pointer;text-decoration:none;display:inline-block}
+.ixgo:hover{background:rgba(201,162,75,.16)}
 .tab{padding:11px 22px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--soft);font-family:var(--body);font-size:.9rem;cursor:pointer;transition:.2s}
 .tab.on{background:linear-gradient(120deg,var(--champ),var(--gold));color:#0a0a0c;border-color:transparent;font-weight:700}
 .controls{position:sticky;top:0;z-index:20;padding:14px 0;margin-top:16px;background:rgba(10,10,12,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
@@ -132,11 +147,14 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
         <h2 class="title">المكتبة <span class="it">الإبداعية</span></h2>
       </div>
       <div class="tabs">
-        <button class="tab on" id="tab-ideas" onclick="switchTab('ideas')">💡 الأفكار + Prompts</button>
+        <button class="tab on" id="tab-overview" onclick="switchTab('overview')">📋 نظرة عامة</button>
+        <button class="tab" id="tab-ideas" onclick="switchTab('ideas')">💡 الأفكار + Prompts</button>
         <button class="tab" id="tab-mood" onclick="switchTab('mood')">🎨 لوحات المزاج</button>
         <button class="tab" id="tab-lib" onclick="switchTab('lib')">🗂️ ٣٠٠ فكرة</button>
         <button class="tab" id="tab-ref" onclick="switchTab('ref')">🖼️ المراجع البصرية</button>
         <button class="tab" id="tab-trends" onclick="switchTab('trends')">🧭 اتجاهات ٢٠٢٦</button>
+        <button class="tab" id="tab-identity" onclick="switchTab('identity')">✒️ الهوية</button>
+        <button class="tab" id="tab-play" onclick="switchTab('play')">📘 الدليل الاستراتيجي</button>
       </div>
     </header>
   </div>
@@ -148,7 +166,27 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
     </div>
   </div>
 
-  <div class="wrap" id="gridWrap">
+  <div class="wrap" id="indexWrap">
+    <div class="idxh"><div class="t">خريطة المشروع الإبداعي</div><div class="s">١٤ مرحلة — اضغط أي مرحلة للانتقال إليها مباشرة.</div></div>
+    <div class="idxgrid">
+      <div class="ixcard"><div class="ixrow"><span class="ixno">01</span><span class="ixst">مكتمل</span></div><h4>التحليل الاستراتيجي</h4><p>السوق، المنافسون، الجمهور، ومواطن التميّز — الأساس الذي بُني عليه كل شيء.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">02</span><span class="ixst">مكتمل</span></div><h4>+١٠٠ فكرة إبداعية</h4><p>١١٣ فكرة مصنّفة مع برومت صورة جاهز لكل فكرة.</p><button class="ixgo" onclick="switchTab('ideas')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">03</span><span class="ixst">مكتمل</span></div><h4>لوحات المزاج</h4><p>١١٣ لوحة مزاج — ألوان، إضاءة، أقمشة، خلفيات وتنسيق.</p><button class="ixgo" onclick="switchTab('mood')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">04</span><span class="ixst">مكتمل</span></div><h4>أبحاث اتجاهات ٢٠٢٦</h4><p>١٢ اتجاه عالمي ومحلي مترجم لخطوات تطبيق لـ AB.</p><button class="ixgo" onclick="switchTab('trends')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">05</span><span class="ixst">مكتمل</span></div><h4>المراجع البصرية</h4><p>١٨ مرجعاً من أعمال AB في ٣ اتجاهات فنية.</p><button class="ixgo" onclick="switchTab('ref')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">06</span><span class="ixst">مكتمل</span></div><h4>الموقع الإلكتروني</h4><p>موقع فاخر متجاوب بلوحة تحكم CMS كاملة.</p><a class="ixgo" href="../" target="_blank" rel="noopener">افتح الموقع ↗</a></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">07</span><span class="ixst">مكتمل</span></div><h4>المعرض / البورتفوليو</h4><p>معرض الأعمال داخل الموقع الرئيسي بصور حقيقية.</p><a class="ixgo" href="../#work" target="_blank" rel="noopener">افتح المعرض ↗</a></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">08</span><span class="ixst">مكتمل</span></div><h4>رحلة العميل + الرسائل</h4><p>١١ خطوة و٩ رسائل واتساب جاهزة للنسخ.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">09</span><span class="ixst">مكتمل</span></div><h4>خطة التسويق ١٢ شهر</h4><p>تقويم محتوى سنوي وأنواع المحتوى الأسبوعي.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">10</span><span class="ixst">مكتمل</span></div><h4>الذكاء الاصطناعي</h4><p>٦ استخدامات عملية للـ AI في إدارة وتسويق الأعمال.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">11</span><span class="ixst">مكتمل</span></div><h4>الباقات والأسعار</h4><p>٥ باقات بأسعار ريال سعودي من الاقتصادية إلى الملكية.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">12</span><span class="ixst">مكتمل</span></div><h4>مكتبة ٣٠٠ فكرة</h4><p>مكتبة قابلة للفلترة بـ٦ محاور + صور AB الحقيقية.</p><button class="ixgo" onclick="switchTab('lib')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">13</span><span class="ixst">مكتمل</span></div><h4>الهوية البصرية</h4><p>دليل الشعار، الألوان، الخطوط، نبرة الصوت والتطبيقات.</p><button class="ixgo" onclick="switchTab('identity')">افتح ←</button></div>
+      <div class="ixcard"><div class="ixrow"><span class="ixno">14</span><span class="ixst">مكتمل</span></div><h4>خطة التنفيذ</h4><p>خطة تنفيذ من ٤ مراحل لإطلاق كل ما سبق.</p><button class="ixgo" onclick="switchTab('play')">افتح الدليل ←</button></div>
+    </div>
+  </div>
+
+  <div class="wrap hidden" id="gridWrap">
     <div class="count-line" id="countLine"></div>
     <div class="grid ideas" id="grid"></div>
   </div>
@@ -420,19 +458,22 @@ const grid=document.getElementById('grid'),chipsEl=document.getElementById('chip
 const KEYS=[['💡','الإضاءة',3],['🌹','الورد',4],['🧵','الأقمشة',5],['🪑','الكراسي',6],['🍽️','الطاولات',7],['🖼️','الخلفية',8],['📐','الديكور',9],['📸','التصوير',10]];
 function data(){ return mode==='ideas'?IDEAS:MOOD; }
 function switchTab(m){
-  ['ideas','mood','lib','ref','trends'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('on',x===m));
+  ['overview','ideas','mood','lib','ref','trends','identity','play'].forEach(x=>{var el=document.getElementById('tab-'+x);if(el)el.classList.toggle('on',x===m);});
   const isGrid=(m==='ideas'||m==='mood');
+  const isIndex=(m==='overview');
+  document.getElementById('indexWrap').classList.toggle('hidden',!isIndex);
   document.getElementById('controls').classList.toggle('hidden',!isGrid);
   document.getElementById('gridWrap').classList.toggle('hidden',!isGrid);
-  document.getElementById('frameWrap').classList.toggle('hidden',isGrid);
+  document.getElementById('frameWrap').classList.toggle('hidden',isGrid||isIndex);
   if(isGrid){
     mode=m; active='الكل';
     grid.className='grid '+(m==='ideas'?'ideas':'mood');
     buildChips(); render();
-  } else {
+  } else if(!isIndex){
     const f=document.getElementById('subframe');
-    const src=(m==='lib'?'library.html':m==='ref'?'references.html':'trends.html');
-    if(f.getAttribute('data-src')!==src){ f.src=src; f.setAttribute('data-src',src); }
+    const map={lib:'library.html',ref:'references.html',trends:'trends.html',identity:'identity.html',play:'playbook.html'};
+    const src=map[m];
+    if(src && f.getAttribute('data-src')!==src){ f.src=src; f.setAttribute('data-src',src); }
   }
 }
 function buildChips(){
@@ -473,7 +514,7 @@ function render(){
 grid.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
   navigator.clipboard.writeText(decodeURIComponent(b.dataset.p)).then(()=>{const o=b.textContent;b.textContent='✓ تم النسخ';b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done')},1400);});});
 qEl.addEventListener('input',render);
-buildChips(); render();
+switchTab('overview');
 </script>
 </body>
 </html>
