@@ -200,9 +200,15 @@ footer{border-top:1px solid var(--line);padding:30px 0 60px;text-align:center;co
 </div>
 
 <script>
-/* ══ CONFIG: غيّر بيانات الدخول من هنا ══ */
-const AUTH = { user: "abevents", pass: "studio2026" };
+/* ══ CONFIG: بيانات الدخول مخزّنة كبصمات SHA-256 (كلمة المرور غير ظاهرة في الكود) ══
+   لتغيير الدخول: احسب بصمة SHA-256 للاسم والكلمة الجديدين وضعها هنا.
+   البيانات الحالية موثّقة بشكل منفصل في STUDIO-ACCESS.md */
+const AUTH = {
+  user: "a5afe8bb06347d5319679e82d42eadabeadda5bd0b076cd7ab0728352103239c",
+  pass: "bee111eca90c948fa76c0147870d9d6e44c7a589a6805292637e9537f941292e"
+};
 const SS_KEY = "ab_studio_auth";
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
 
 const S="photorealistic, cinematic warm editorial lighting, soft shadows, shallow depth of field, ultra-detailed, 8k";
 /* IDEAS: [cat,title,desc,prompt] */
@@ -443,10 +449,13 @@ const CATICON={"زواج":"💍","ملكة":"👑","ميلاد":"🎂","موال
 const IMG={"ركن قهوة وتمر نجدي":"event-1.jpg","تنسيق طاولة ممتد":"event-2.jpg","جلسة قهوة عربية":"event-3.jpg","باقة العروس":"event-4.jpg","ليلة الحناء النجدية":"event-5.jpg","زفاف نجدي فاخر":"event-6.jpg","ركن نجدي تراثي":"event-7.jpg","مدخل الملكة":"event-8.jpg","قوس ورد للمدخل":"event-9.jpg"};
 
 /* ══ AUTH ══ */
-function tryLogin(){
+async function tryLogin(){
   const u=document.getElementById('gu').value.trim(), p=document.getElementById('gp').value;
-  if(u===AUTH.user && p===AUTH.pass){ sessionStorage.setItem(SS_KEY,"1"); reveal(); }
-  else { document.getElementById('gerr').textContent="بيانات الدخول غير صحيحة"; }
+  try{
+    const [hu,hp]=await Promise.all([sha256(u),sha256(p)]);
+    if(hu===AUTH.user && hp===AUTH.pass){ sessionStorage.setItem(SS_KEY,"1"); reveal(); }
+    else { document.getElementById('gerr').textContent="بيانات الدخول غير صحيحة"; }
+  }catch(e){ document.getElementById('gerr').textContent="تعذّر التحقق — استخدم متصفحاً حديثاً على HTTPS"; }
 }
 function reveal(){ document.getElementById('gate').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); }
 function logout(){ sessionStorage.removeItem(SS_KEY); location.reload(); }
