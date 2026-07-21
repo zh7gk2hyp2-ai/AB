@@ -312,6 +312,11 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
   font-weight:500;line-height:1.5;}
 .vidcard .tt-badge{position:absolute;top:10px;right:10px;z-index:2;background:rgba(11,11,13,.6);backdrop-filter:blur(4px);
   border:1px solid rgba(201,162,75,.4);color:var(--champagne);font-size:.64rem;padding:4px 9px;border-radius:100px;letter-spacing:.5px;}
+.vidcard video{width:100%;height:100%;object-fit:cover;display:block;background:#15151b;}
+.vidcard.playing{cursor:default;}
+.vidcard.playing::after{display:none;}
+.vidcard.playing .play,.vidcard.playing .cap,.vidcard.playing .tt-badge{opacity:0;pointer-events:none;}
+.vidcard.playing video{object-fit:contain;background:#000;}
 @media(max-width:900px){.vid-grid{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:620px){.vid-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
 
@@ -645,8 +650,8 @@ h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800;}
 <section class="section dark" id="videos">
   <div class="wrap" style="text-align:center">
     <span class="eyebrow" style="justify-content:center">من كواليسنا</span>
-    <h2 class="title reveal">شاهد إبداعاتنا على <span class="thin">تيك توك</span></h2>
-    <p class="subtitle muted reveal" style="margin:18px auto 40px">مقاطع حقيقية من مناسباتنا وتنسيقاتنا — اضغط أي مقطع لمشاهدته على تيك توك.</p>
+    <h2 class="title reveal">شاهد <span class="thin">إبداعاتنا</span></h2>
+    <p class="subtitle muted reveal" style="margin:18px auto 40px">مقاطع حقيقية من مناسباتنا وتنسيقاتنا — اضغط أي مقطع لتشغيله مباشرة.</p>
     <div class="vid-grid reveal" id="vidGrid"><!-- filled by JS --></div>
     <p class="tt-note" style="margin-top:30px">تابع كل جديد على <a href="https://www.tiktok.com/@abevents02" target="_blank" rel="noopener">@abevents02</a></p>
   </div>
@@ -877,25 +882,38 @@ const lt=document.getElementById('logoTrack');
 
 /* ═════ TIKTOK VIDEOS (real content) ═════ */
 const VIDEOS=[
-  {id:'7663459981957582100',cap:'مشاركة عائلة النفيعي'},
-  {id:'7658835023608532245',cap:'رأي وتصوير عميلتنا مشاعل'},
-  {id:'7658568594308992277',cap:'روضة دار البراعم'},
-  {id:'7657279951330299157',cap:'حفلات الطائف'},
-  {id:'7657112781673499924',cap:'التفاصيل الدقيقة تصنع التميّز'},
-  {id:'7656230504236092693',cap:'أفراح وحفلات الطائف'},
-  {id:'7655302126666517780',cap:'شاليهات الطائف'},
-  {id:'7655079396830825748',cap:'تنسيق حفلات'},
-  {id:'7654861359552711956',cap:'تنسيق شاليهات الطائف'},
+  {f:'vid-01',cap:'ركن ترحيب خشبي بلمسة ذهبية'},
+  {f:'vid-02',cap:'مجلس فخم بإضاءة الكريستال'},
+  {f:'vid-03',cap:'كوشة رخامية وردية بالورد'},
+  {f:'vid-04',cap:'كوشة وردية بأغصان الزيتون'},
+  {f:'vid-05',cap:'ثيم الأورنج والخشب البني'},
+  {f:'vid-06',cap:'ميلاد وردي خارجي بالكيك'},
+  {f:'vid-07',cap:'عمود بالون وردي عند المدخل'},
+  {f:'vid-08',cap:'ميلاد الفراشات الوردي'},
+  {f:'vid-09',cap:'تجهيز حفل خارجي مسائي'},
+  {f:'vid-10',cap:'قوس بالون وردي لميلاد خارجي'},
+  {f:'vid-11',cap:'تنسيق ورد برتقالي خارجي'},
+  {f:'vid-12',cap:'ستاند تخرّج بقماش ذهبي'},
+  {f:'vid-13',cap:'تخرّج دفعة ٢٠٢٦'},
 ];
 const vidGrid=document.getElementById('vidGrid');
 if(vidGrid){
   vidGrid.innerHTML=VIDEOS.map(v=>`
-    <a class="vidcard" href="https://www.tiktok.com/@abevents02/video/${v.id}" target="_blank" rel="noopener" data-cursor>
-      <img src="assets/media/${v.id}.jpg" alt="${v.cap} — AB Events" loading="lazy">
-      <span class="tt-badge">▶ TikTok</span>
+    <div class="vidcard" data-cursor>
+      <video preload="none" playsinline loop muted poster="assets/media/videos/${v.f}.jpg" aria-label="${v.cap} — AB Events">
+        <source src="assets/media/videos/${v.f}.mp4" type="video/mp4">
+      </video>
       <span class="play">▶</span>
       <span class="cap">${v.cap}</span>
-    </a>`).join('');
+    </div>`).join('');
+  vidGrid.addEventListener('click',e=>{
+    const card=e.target.closest('.vidcard'); if(!card) return;
+    const vid=card.querySelector('video');
+    if(vid.paused){
+      vidGrid.querySelectorAll('video').forEach(o=>{ if(o!==vid){ o.pause(); o.controls=false; o.closest('.vidcard').classList.remove('playing'); }});
+      vid.muted=false; vid.controls=true; card.classList.add('playing'); vid.play();
+    } else { vid.pause(); vid.controls=false; card.classList.remove('playing'); }
+  });
 }
 
 /* ═════ GALLERY (real images) ═════ */
